@@ -158,13 +158,11 @@ const modifierHelper = (key, acc, currentData) => {
     currentData.key.includes("polar")
   ) {
     acc[`ant${key}`].push({
-      key: currentData.key,
-      value: currentData.value
+      currentData
     });
   } else {
     acc[`site${key}`].push({
-      key: currentData.key,
-      value: currentData.value
+      currentData
     });
   }
   return acc;
@@ -177,8 +175,7 @@ const modifier = (acc, currentData) => {
     };
   } else if (currentData.key.includes("rgba")) {
     acc.extra.push({
-      key: currentData.key,
-      value: currentData.value
+      currentData
     });
   } else if (currentData.key.includes("a_") || currentData.key.includes("A_")) {
     acc = modifierHelper("A", acc, currentData);
@@ -186,8 +183,7 @@ const modifier = (acc, currentData) => {
     acc = modifierHelper("B", acc, currentData);
   } else {
     acc.extra.push({
-      key: currentData.key,
-      value: currentData.value
+      currentData
     });
   }
   return;
