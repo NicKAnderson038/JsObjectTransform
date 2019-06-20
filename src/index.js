@@ -157,13 +157,9 @@ const modifierHelper = (key, acc, currentData) => {
     currentData.key.includes("gain") ||
     currentData.key.includes("polar")
   ) {
-    acc[`ant${key}`].push({
-      currentData
-    });
+    acc[`ant${key}`].push({ key: currentData.key, value: currentData.value });
   } else {
-    acc[`site${key}`].push({
-      currentData
-    });
+    acc[`site${key}`].push({ key: currentData.key, value: currentData.value });
   }
   return acc;
 };
@@ -174,17 +170,13 @@ const modifier = (acc, currentData) => {
       [currentData.key]: currentData.value
     };
   } else if (currentData.key.includes("rgba")) {
-    acc.extra.push({
-      currentData
-    });
+    acc.extra.push({ key: currentData.key, value: currentData.value });
   } else if (currentData.key.includes("a_") || currentData.key.includes("A_")) {
-    acc = modifierHelper("A", acc, currentData);
+    acc = { ...modifierHelper("A", acc, currentData) };
   } else if (currentData.key.includes("b_") || currentData.key.includes("B_")) {
-    acc = modifierHelper("B", acc, currentData);
+    acc = { ...modifierHelper("B", acc, currentData) };
   } else {
-    acc.extra.push({
-      currentData
-    });
+    acc.extra.push({ key: currentData.key, value: currentData.value });
   }
   return;
 };
