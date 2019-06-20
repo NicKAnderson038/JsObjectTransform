@@ -171,7 +171,6 @@ const modifierHelper = (key, acc, currentData) => {
 };
 
 const modifier = (acc, currentData) => {
-  const obj = {};
   if (currentData.key === "object_type") {
     return {
       [currentData.key]: currentData.value
@@ -191,7 +190,7 @@ const modifier = (acc, currentData) => {
       value: currentData.value
     });
   }
-  return obj;
+  return;
 };
 
 const res = obj.reduce(
