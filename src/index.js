@@ -172,9 +172,9 @@ const modifier = (acc, currentData) => {
   } else if (currentData.key.includes("rgba")) {
     acc.extra.push({ key: currentData.key, value: currentData.value });
   } else if (currentData.key.includes("a_") || currentData.key.includes("A_")) {
-    acc = { ...modifierHelper("A", acc, currentData) };
+    return { ...modifierHelper("A", acc, currentData) };
   } else if (currentData.key.includes("b_") || currentData.key.includes("B_")) {
-    acc = { ...modifierHelper("B", acc, currentData) };
+    return { ...modifierHelper("B", acc, currentData) };
   } else {
     acc.extra.push({ key: currentData.key, value: currentData.value });
   }
