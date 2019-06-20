@@ -151,6 +151,25 @@ const obj = [
   }
 ];
 
+const modifierHelper = (key, acc, currentData) => {
+  if (
+    currentData.key.includes("ant") ||
+    currentData.key.includes("gain") ||
+    currentData.key.includes("polar")
+  ) {
+    acc[`ant${key}`].push({
+      key: currentData.key,
+      value: currentData.value
+    });
+  } else {
+    acc[`site${key}`].push({
+      key: currentData.key,
+      value: currentData.value
+    });
+  }
+  return acc;
+};
+
 const modifier = (acc, currentData) => {
   const obj = {};
   if (currentData.key === "object_type") {
@@ -163,37 +182,9 @@ const modifier = (acc, currentData) => {
       value: currentData.value
     });
   } else if (currentData.key.includes("a_") || currentData.key.includes("A_")) {
-    if (
-      currentData.key.includes("ant") ||
-      currentData.key.includes("gain") ||
-      currentData.key.includes("polar")
-    ) {
-      acc.antA.push({
-        key: currentData.key,
-        value: currentData.value
-      });
-    } else {
-      acc.siteA.push({
-        key: currentData.key,
-        value: currentData.value
-      });
-    }
+    acc = modifierHelper("A", acc, currentData);
   } else if (currentData.key.includes("b_") || currentData.key.includes("B_")) {
-    if (
-      currentData.key.includes("ant") ||
-      currentData.key.includes("gain") ||
-      currentData.key.includes("polar")
-    ) {
-      acc.antB.push({
-        key: currentData.key,
-        value: currentData.value
-      });
-    } else {
-      acc.siteB.push({
-        key: currentData.key,
-        value: currentData.value
-      });
-    }
+    acc = modifierHelper("B", acc, currentData);
   } else {
     acc.extra.push({
       key: currentData.key,
